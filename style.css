@@ -1,0 +1,176 @@
+:root {
+    --sharingan-size: 400px;
+    --black: #000;
+    --red: hsl(0, 100%, 36%);
+    --normal-color: hsl(0, 0%, 25%);
+    --border-width: calc(var(--sharingan-size) / 30);
+    --iris-size: calc(var(--sharingan-size) / 2);
+    --tomoe-size: calc(var(--sharingan-size) / 6.5);
+    --pupil-size: calc(var(--sharingan-size) / 5);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Centered */
+body {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: #222;
+}
+
+.sharingan {
+    width: var(--sharingan-size);
+    height: var(--sharingan-size);
+    border: var(--border-width) solid var(--black);
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 100px 10px var(--black) inset;
+    position: relative;
+}
+
+.pupil {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--pupil-size);
+    height: var(--pupil-size);
+    background: var(--black);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 100px 10px #fc3636;
+    transition: all 1s ease-in-out;
+
+}
+
+.iris {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--iris-size);
+    height: var(--iris-size);
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--black);
+    border-radius: 50%;
+    opacity: .5;
+}
+
+.tomoes {
+    height: 100%;
+    width: 100%;
+}
+
+.tomoe-area {
+    position: absolute;
+    width: var(--iris-size);
+    height: var(--iris-size);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.tomoe {
+    /*   opacity: 0; */
+    width: var(--tomoe-size);
+    height: var(--tomoe-size);
+    position: absolute;
+    background-color: var(--black);
+    border-radius: 50%;
+    left: 50%;
+    top: -16.6%;
+    transform: translate(-50%);
+    transition: all 1s ease-in-out;
+    transition-delay: 400ms;
+
+}
+
+/* tomoe aspa */
+.tomoe::before {
+    content: '';
+    position: absolute;
+    top: -30.3%;
+    left: 3.1%;
+    width: calc(var(--tomoe-size) * 1.51);
+    height: calc(var(--tomoe-size) * 1.69);
+    border-radius: 50%;
+    border-top: calc(var(--tomoe-size) / 2.6) solid var(--black);
+    border-left: calc(var(--tomoe-size) / 9.7) solid transparent;
+    transform: rotate(-35deg);
+    transition: all .3s ease;
+    transition-delay: 300ms;
+
+    transition-property: top,
+        left,
+        width;
+
+}
+
+
+.tomoe-area:first-child {
+    transform: translate(-50%, -50%);
+}
+
+.tomoe-area:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(120deg);
+}
+
+.tomoe-area:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(-120deg);
+}
+
+
+
+/***************************************
+  ANIMATION
+***************************************/
+.sharingan:hover {
+    animation: spin 1s infinite linear;
+    animation-timing-function: ease;
+}
+
+.sharingan:hover .pupil {
+    background-color: #c30c0c;
+    z-index: 999;
+    border: 1px solid;
+}
+
+.sharingan:hover .tomoes .tomoe {
+    width: 25px;
+    height: 50px;
+    top: -65px;
+    border-bottom: solid 140px rgb(0 0 0);
+    border-left: solid 45px transparent;
+    border-right: solid 10px transparent;
+    border-radius: 110px 110px 0px 0px;
+
+
+}
+
+.sharingan:hover .tomoes .tomoe::before {
+    border: 50px solid black;
+    border-width: 20px 1px 0 65px;
+    transform: rotate(60deg);
+    top: 30px;
+    left: -85px;
+    width: 220px;
+
+}
+
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+
+    }
+}
